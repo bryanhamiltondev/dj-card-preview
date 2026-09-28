@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dj-card-preview - demo</title>
+<style>
+  :root { color-scheme: dark; --neon: #00d2ff; }
+  body {
+    margin: 0;
+    padding: 48px 24px;
+    background: #0d1117;
+    color: #e6edf3;
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  h1 span { color: var(--neon); }
+  p.lead { color: #8b949e; margin: 0 0 32px; }
+  .howto {
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 0 0 40px;
+    color: #8b949e;
+    font-size: 14px;
+  }
+  .howto strong { color: #e6edf3; }
+
+  /*
+   * The homepage card contract. Structure is production-derived;
+   * the card/overlay visual values are a faithful reconstruction of
+   * the homepage treatment (see README for what is verbatim).
+   */
+  .dj-grid { display: flex; flex-wrap: wrap; gap: 28px; }
+  .dj-card {
+    display: block;
+    width: 280px;
+    text-decoration: none;
+    color: #e6edf3;
+    outline-offset: 3px;
+  }
+  .card-image {
+    position: relative;
+    overflow: hidden;
+    height: 340px;
+    border-radius: 10px;
+    background: #10141f;
+  }
+  .card-image-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .card-image-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 16px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .card-overlay-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8b949e;
+  }
+  .card-overlay-track {
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 1.3;
+    color: #fff;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  /* production values, verbatim from the site */
+  .waveform-canvas {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .card-rank {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    z-index: 6;
+    padding: 4px 10px;
+    border: 1.5px solid var(--neon);
+    border-radius: 4px;
+    color: var(--neon);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.55);
+  }
+  .dj-card-name {
+    margin-top: 14px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>dj<span>-</span>card<span>-</span>preview</h1>
+  <p class="lead">The homepage hover preview from The DJ Calendar, extracted as a zero-dependency widget. Hover the card: a real 30-second iTunes preview plays, and the 8-bar EQ is driven by the audio's actual frequencies - not an animation pretending.</p>
+
+  <div class="howto">
+    <strong>How to hear it:</strong> click anywhere on this page once (browsers require one gesture before any audio), then roll over the photo. The preview starts, the EQ dances to the real sound, and the overlay names the track. Roll off - or let the 30 seconds end - and everything stops.
+  </div>
+
+  <div id="djGrid" class="dj-grid">
+    <a class="dj-card" href="https://thedjcalendar.com/davidguetta"
+       data-id="davidguetta"
+       data-name="David Guetta"
+       data-image="https://cdn-images.dzcdn.net/images/artist/2d527fa03e106ed82a28f161694278d3/500x500-000000-80-0-0.jpg"
+       data-preview-url="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/45/dd/8f/45dd8ffc-0164-1f70-c53d-bf91a1d80b1a/mzaf_3092057092144618662.plus.aac.p.m4a"
+       data-preview-title="Titanium (feat. Sia)"
+       aria-label="David Guetta, rank 1 - hovering plays a 30 second preview of Titanium">
+      <span class="card-image">
+        <img class="card-image-photo" src="https://cdn-images.dzcdn.net/images/artist/2d527fa03e106ed82a28f161694278d3/500x500-000000-80-0-0.jpg" alt="David Guetta">
+        <span class="card-image-overlay">
+          <span class="card-overlay-label">You are now listening to:</span>
+          <span class="card-overlay-track"></span>
+        </span>
+        <canvas class="waveform-canvas" width="280" height="40"></canvas>
+        <span class="card-rank">#1</span>
+      </span>
+      <span class="dj-card-name">David Guetta</span>
+    </a>
+  </div>
+
+  <p class="lead" style="margin-top:48px">No JavaScript frameworks. No build step. The lookup falls back to the live iTunes Search API when a card ships without a cached URL - the same call production makes for all 99 artists.</p>
+</main>
+<script src="../src/dj-card-preview.js"></script>
+</body>
+</html>
