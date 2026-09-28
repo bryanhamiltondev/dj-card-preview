@@ -5,7 +5,7 @@
 ![Audio](https://img.shields.io/badge/audio-iTunes%20previews-00d2ff?style=flat)
 ![EQ](https://img.shields.io/badge/EQ-real%20Web%20Audio%20frequencies-00d2ff?style=flat)
 
-**[Try it live](https://bryanhamiltondev.github.io/dj-card-preview/demo/)** - hover the card and David Guetta actually plays.
+**[Try it live](https://bryanhamiltondev.github.io/dj-card-preview/)** - hover the card and David Guetta actually plays.
 
 The homepage hover preview from [The DJ Calendar](https://thedjcalendar.com),
 extracted as a standalone, open-source widget. Roll over an artist photo and
@@ -90,11 +90,11 @@ touch, the tap itself is the gesture.
 
 ## Demo note
 
-The hosted demo hardcodes one cached preview URL (David Guetta,
-"Titanium (feat. Sia)") so it always works with zero backend. Production
-does the live lookup server-side-assisted for 99 artists; the demo shows
-the cached path, which is also the path production hits after a card's
-first hover.
+The hosted demo (at this repo's Pages root, also under `/demo/`) hardcodes
+one cached preview URL (David Guetta, "Titanium (feat. Sia)") so it always
+works with zero backend. Production does the live lookup for 99 artists;
+the demo shows the cached path, which is also the path production hits
+after a card's first hover.
 
 ## Requirements
 
