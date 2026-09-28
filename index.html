@@ -31,8 +31,8 @@
    * The homepage card contract. Structure is production-derived;
    * the card/overlay visual values are a faithful reconstruction of
    * the homepage treatment (see README for what is verbatim).
-   * Demo-only tweak: the waveform canvas is twice the production
-   * height (80px vs 40px) so the bars read better at demo scale.
+   * Demo-only tweak: the waveform canvas is 4x the production height
+   * (160px vs 40px) so the bars read dramatically at demo scale.
    * The widget derives its bar math from the canvas, so no library
    * change was needed.
    */
@@ -97,7 +97,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 80px; /* production: 40px */
+    height: 160px; /* production: 40px */
     z-index: 10;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -160,7 +160,7 @@
           <span class="card-overlay-label">You are now listening to:</span>
           <span class="card-overlay-track"></span>
         </span>
-        <canvas class="waveform-canvas" width="280" height="80"></canvas>
+        <canvas class="waveform-canvas" width="280" height="160"></canvas>
         <span class="card-rank">#1</span>
       </span>
       <span class="dj-card-name">David Guetta</span>
