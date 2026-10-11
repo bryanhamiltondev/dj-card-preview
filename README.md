@@ -115,3 +115,4 @@ Sibling repos: [eq-visualizer](https://github.com/bryanhamiltondev/eq-visualizer
 ## License
 
 MIT
+Built by Bryan Hamilton
